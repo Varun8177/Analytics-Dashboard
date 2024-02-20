@@ -12,15 +12,15 @@ const Overviews = () => {
     },
     {
       bgColor: "#FAD85D",
-      title: "Weekly Balance",
-      value: "$20k",
+      title: "Monthly Orders",
+      value: "376",
       overviewImage:
         "https://res.cloudinary.com/megamart/image/upload/f_auto,q_auto/v1/Analytics%20Dashboard/qnspxqe9tyu33ucykpye",
     },
     {
       bgColor: "#F2A0FF",
-      title: "Weekly Balance",
-      value: "$20k",
+      title: "Customers Joined Today",
+      value: "5",
       overviewImage:
         "https://res.cloudinary.com/megamart/image/upload/f_auto,q_auto/v1/Analytics%20Dashboard/dmssfdrcqsivaw4dhr9e",
     },
