@@ -15,7 +15,7 @@ const DataContextProvider = ({ children }) => {
   const getData = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${baseUrl}/data`, {
+      const res = await axios.get(`${baseUrl}`, {
         params: searchParams,
       });
       const salesAndTraffic = {

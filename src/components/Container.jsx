@@ -6,10 +6,9 @@ import { useMediaQuery } from "react-responsive";
 import { twMerge } from "tailwind-merge";
 import Charts from "./container/Charts";
 import { dataContext } from "../contexts/DataContext";
-import Loader from "./constants/Loader";
 
 const Container = () => {
-  const { data, loading } = useContext(dataContext);
+  const { data } = useContext(dataContext);
   const iconsOnly = useMediaQuery({
     query: "(max-width: 700px)",
   });
@@ -31,13 +30,15 @@ const Container = () => {
             options={["Line", "Bar"]}
             showImage
             title="Sales and Traffic"
-            queryTitle="salesYear"
+            yearQueryTitle="salesYear"
+            typeQueryTitle="sales-graph-type"
           />
           <Charts
             chartData={data?.visitors}
             options={["Pie", "Doughnut"]}
             title="Visitors"
-            queryTitle="visitorYear"
+            yearQueryTitle="visitorYear"
+            typeQueryTitle="visitor-graph-type"
           />
         </div>
       ) : null}
