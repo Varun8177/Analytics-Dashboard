@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import ChartTypeSelector from "./ChartTypeSelector";
+import ChartYearFilter from "./ChartYearFilter";
+import { useSearchParams } from "react-router-dom";
 
-const Charts = ({ options = [], chartData, showImage = false, title = "" }) => {
-  const [selected, setSelected] = useState(options[0].toLowerCase() || "");
+const Charts = ({
+  options = [],
+  chartData,
+  showImage = false,
+  title = "",
+  yearQueryTitle,
+  typeQueryTitle,
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selected, setSelected] = useState(
+    searchParams.get(typeQueryTitle) || options[0].toLowerCase(),
+  );
 
-  const handleSelect = (val) => setSelected(val);
+  const handleSelect = (val) => {
+    searchParams.set(typeQueryTitle, val);
+    setSearchParams(searchParams);
+    setSelected(val);
+  };
 
   const graphProps = {
     data: chartData,
@@ -17,11 +33,16 @@ const Charts = ({ options = [], chartData, showImage = false, title = "" }) => {
   return (
     <div className="grow space-y-4 lg:w-1/2">
       <p className="text-sm font-semibold text-white">{title}</p>
-      <ChartTypeSelector
-        options={options}
-        selected={selected}
-        handleSelect={handleSelect}
-      />
+      <div className="flex flex-col-reverse gap-4 md:flex-row">
+        <ChartTypeSelector
+          options={options}
+          selected={selected}
+          handleSelect={handleSelect}
+        />
+
+        <ChartYearFilter yearQueryTitle={yearQueryTitle} />
+      </div>
+
       <div className="relative flex h-auto w-full flex-wrap gap-4 rounded-md bg-[#161717] p-4 md:h-[400px]">
         <div className="max-w-full grow rounded-md border p-4 lg:max-w-[90%]">
           {selected === "line" ? (
