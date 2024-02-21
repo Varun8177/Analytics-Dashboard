@@ -71,7 +71,7 @@ const NavigationBar = () => {
         <img
           src="https://res.cloudinary.com/megamart/image/upload/f_auto,q_auto/v1/Analytics%20Dashboard/glfxm8pjygdmogygwxpt"
           alt="logo"
-          className="m-auto h-12 w-12"
+          className="m-auto h-12 w-12 cursor-pointer"
         />
       )}
       <div

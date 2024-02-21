@@ -1,121 +1,78 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Header from "./Header";
 import Overviews from "./container/Overviews";
-import { Bar, Line, Pie } from "react-chartjs-2";
 // eslint-disable-next-line no-unused-vars
-import { Chart as ChartJS } from "chart.js/auto";
 import { useMediaQuery } from "react-responsive";
 import { twMerge } from "tailwind-merge";
+import Charts from "./container/Charts";
+
+function getRandomData(length = 12) {
+  const temp = [];
+  for (let i = 0; i < length; i++) {
+    temp.push(Math.floor(Math.random() * (100 - 10 + 1)) + 10);
+  }
+  return temp;
+}
 
 const Container = () => {
   const iconsOnly = useMediaQuery({
     query: "(max-width: 700px)",
   });
-  const charts = [
-    {
-      chart: (
-        <Line
-          data={{
-            labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec",
-            ],
-            datasets: [
-              {
-                label: "sales",
-                backgroundColor: "#383456",
-                data: [20, 15, 19, 12, 36, 18, 14, 11, 13, 20, 25, 23],
-                borderColor: "#9891cc",
-                fill: true,
-              },
-            ],
-          }}
-          options={{
-            maintainAspectRatio: false,
-          }}
-        />
-      ),
-    },
-    {
-      chart: (
-        <Bar
-          data={{
-            labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec",
-            ],
-            datasets: [
-              {
-                label: "sales",
-                backgroundColor: "#383456",
-                data: [20, 15, 19, 12, 36, 18, 14, 11, 13, 20, 25, 23],
-                borderColor: "#9891cc",
-                fill: true,
-              },
-            ],
-          }}
-          options={{
-            maintainAspectRatio: false,
-          }}
-        />
-      ),
-    },
-    {
-      chart: (
-        <Pie
-          data={{
-            labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec",
-            ],
-            datasets: [
-              {
-                label: "sales",
-                backgroundColor: "#383456",
-                data: [20, 15, 19, 12, 36, 18, 14, 11, 13, 20, 25, 23],
-                borderColor: "#9891cc",
-                fill: true,
-              },
-            ],
-          }}
-          options={{
-            maintainAspectRatio: false,
-          }}
-        />
-      ),
-    },
-  ];
-  //   const chartData = ;
+
+  const chartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Sales",
+        backgroundColor: "rgba(152, 145, 204, 1)",
+        data: useMemo(() => {
+          return getRandomData();
+        }, []),
+        borderColor: "rgba(152, 145, 204, 1)",
+      },
+      {
+        label: "Traffic",
+        backgroundColor: "rgba(255, 189, 105, 1)",
+        data: useMemo(() => {
+          return getRandomData();
+        }, []),
+        borderColor: "rgba(255, 189, 105, 1)",
+      },
+    ],
+  };
+
+  const pieData = {
+    labels: ["Instagram", "Facebook", "Youtube", "website"],
+    datasets: [
+      {
+        label: "Visitors",
+        backgroundColor: [
+          "rgba(232,99,132,1)",
+          "rgba(232,211,6,1)",
+          "rgba(54,162,235,1)",
+          "rgba(255,159,64,1)",
+          "rgba(153,102,255,1)",
+        ],
+        data: useMemo(() => {
+          return getRandomData(4);
+        }, []),
+        borderColor: "rgba(152, 145, 204, 1)",
+      },
+    ],
+  };
 
   return (
     <div
@@ -127,13 +84,20 @@ const Container = () => {
       <Header />
       <p className="text-3xl font-semibold text-white">Hello, Uroos</p>
       <Overviews />
-      <div className="justify-left flex w-fit flex-wrap gap-4 rounded-md bg-[#161717] p-4">
-        {charts.map((item, i) => (
-          <div key={i} className="max-w-[400px] grow rounded-md border">
-            {item.chart}
-          </div>
-        ))}
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <Charts
+          chartData={chartData}
+          options={["Line", "Bar"]}
+          showImage
+          title="Sales and Traffic"
+        />
+        <Charts
+          chartData={pieData}
+          options={["Pie", "Doughnut"]}
+          title="Visitors"
+        />
       </div>
+      <div className="h-10" />
     </div>
   );
 };
