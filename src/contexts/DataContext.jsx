@@ -14,6 +14,8 @@ const DataContextProvider = ({ children }) => {
   });
   const [error, setError] = useState(false);
   const [searchParams] = useSearchParams();
+  const salesYear = searchParams.get("salesYear");
+  const visitorYear = searchParams.get("visitorYear");
 
   const getData = async () => {
     if (loading.action !== "done") {
@@ -84,7 +86,7 @@ const DataContextProvider = ({ children }) => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [salesYear, visitorYear]);
   return (
     <dataContext.Provider value={{ data, loading: loading.loader, error }}>
       {children}

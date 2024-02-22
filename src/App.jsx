@@ -4,16 +4,11 @@ import NavigationBar from "./components/NavigationBar";
 
 export default function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="flex max-h-screen min-h-screen w-full bg-[#242424]">
-            <NavigationBar />
-            <Container />
-          </div>
-        }
-      />
-    </Routes>
+    <div className="flex max-h-screen min-h-screen w-full bg-[#242424]">
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<Container />} />
+      </Routes>
+    </div>
   );
 }
