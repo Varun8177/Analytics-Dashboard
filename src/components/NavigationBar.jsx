@@ -24,11 +24,13 @@ const NavigationBar = () => {
       icon: <GoHome color="white" size={20} />,
       title: "home",
       id: 1,
+      path: "/",
     },
     {
       icon: <PiSquaresFourLight color="white" size={20} />,
       title: "options",
       id: 2,
+      path: "/profits",
     },
     {
       icon: <FaRegFileAlt color="white" size={20} />,
