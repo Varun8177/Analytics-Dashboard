@@ -8,12 +8,17 @@ export const dataContext = createContext();
 
 const DataContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    loader: false,
+    action: "",
+  });
   const [error, setError] = useState(false);
   const [searchParams] = useSearchParams();
 
   const getData = async () => {
-    setLoading(true);
+    if (loading.action !== "done") {
+      setLoading({ loader: true, action: "pending" });
+    }
     try {
       const res = await axios.get(`${baseUrl}`, {
         params: searchParams,
@@ -70,15 +75,18 @@ const DataContextProvider = ({ children }) => {
     } catch (error) {
       setError(true);
     } finally {
-      setLoading(false);
+      if (loading.action !== "done") {
+        setLoading({ loader: false, action: "done" });
+      }
     }
   };
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
   return (
-    <dataContext.Provider value={{ data, loading, error }}>
+    <dataContext.Provider value={{ data, loading: loading.loader, error }}>
       {children}
     </dataContext.Provider>
   );

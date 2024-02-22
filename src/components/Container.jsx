@@ -6,9 +6,11 @@ import { useMediaQuery } from "react-responsive";
 import { twMerge } from "tailwind-merge";
 import Charts from "./container/Charts";
 import { dataContext } from "../contexts/DataContext";
+import Loader from "./constants/Loader";
+import Error from "./constants/Error";
 
 const Container = () => {
-  const { data } = useContext(dataContext);
+  const { data, loading, error } = useContext(dataContext);
   const iconsOnly = useMediaQuery({
     query: "(max-width: 700px)",
   });
@@ -16,14 +18,16 @@ const Container = () => {
   return (
     <div
       className={twMerge(
-        "h-full  max-h-screen grow space-y-4 overflow-y-auto px-4 pt-2",
+        "h-full max-h-screen grow space-y-4 overflow-y-auto px-4 pt-2",
         iconsOnly && "max-h-[90vh]",
       )}
     >
       <Header />
       <p className="text-3xl font-semibold text-white">Hello, Uroos</p>
       <Overviews />
-      {data ? (
+      {loading ? (
+        <Loader />
+      ) : data ? (
         <div className="flex flex-col gap-4 lg:flex-row">
           <Charts
             chartData={data?.salesAndTraffic}
@@ -41,6 +45,8 @@ const Container = () => {
             typeQueryTitle="visitor-graph-type"
           />
         </div>
+      ) : error ? (
+        <Error />
       ) : null}
       <div className="h-10" />
     </div>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
 import DataContextProvider from "./contexts/DataContext";
 import { BrowserRouter } from "react-router-dom";
