@@ -2,11 +2,14 @@ A responsive and interactive dashboard that visualises data from a fictional e-c
 platform.
 
 # Installation
- 1. clone the repository
- 2. `npm install`
- 3. add env variables
-    - `REACT_APP_BASEURL=https://analytics-dashboard-backend-drab.vercel.app`
- 4. `npm run start`
+ 1. clone the repository (use tools like gitbash,terminal,vscode)
+   - `git clone https://github.com/Varun8177/Analytics-Dashboard.git`
+ 2. navigate to the folder.
+ 3. `npm install` in terminal
+ 4. add env variables
+    - create a file named `.env`
+    - add this in `.env` file `REACT_APP_BASEURL=https://analytics-dashboard-backend-drab.vercel.app`
+ 5. run `npm run start` in terminal
 
 ## Tech Stack Used
 
